@@ -26,8 +26,8 @@
 		"debug.chrome.useV3": true
 	},
 
-	// noVNC, VNC ports
-	"forwardPorts": [6080, 5901],
+	// noVNC, VNC ports, debug
+	"forwardPorts": [6080, 5901, 9222],
 
 	"extensions": [
 		"dbaeumer.vscode-eslint",
