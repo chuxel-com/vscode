@@ -32,4 +32,4 @@ jobs:
             IMAGE_TAG=${GIT_BRANCH}
           fi
           echo ${{secrets.IMAGE_REGISTRY_PAT}} | docker login ghcr.io -u ${{secrets.IMAGE_REGISTRY_USER}} --password-stdin
-          bash .devcontainer/build-image.sh ${{secrets.BASE_IMAGE_REPOSITORY_PATH}}/devcontainers/code-oss ${IMAGE_TAG}
+          bash .devcontainer/build-image.sh ghcr.io/chuxel-com/devcontainers/code-oss ${IMAGE_TAG}
