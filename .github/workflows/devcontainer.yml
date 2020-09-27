@@ -1,0 +1,35 @@
+name: Dev Container Image Generation
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  push:
+    branches: [master]
+    paths:
+      - '.devcontainer/base.Dockerfile'
+      - '.devcontainer/library-scripts/**'
+
+jobs:
+  devcontainer:
+    name: Build and push dev container image for the code-oss repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v2
+
+      - name: Build and push
+        id: build_and_push
+        run: |
+          set -e
+          GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+          if [ "$GIT_BRANCH" == "" ]; then
+              GIT_BRANCH=master
+          fi
+          if [ "${GIT_BRANCH}" == "master" ]; then
+            IMAGE_TAG="latest"
+          else
+            IMAGE_TAG=${GIT_BRANCH}
+          fi
+          echo ${{secrets.IMAGE_REGISTRY_PAT}} | docker login ghcr.io -u ${{secrets.IMAGE_REGISTRY_USER}} --password-stdin
+          bash .devcontainer/build-image.sh ${{secrets.BASE_IMAGE_REPOSITORY_PATH}}/devcontainers/code-oss ${IMAGE_TAG}

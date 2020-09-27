@@ -1,21 +1,17 @@
 {
 	"name": "Code - OSS",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"args": {
-			"MAX_VNC_RESOLUTION": "1920x1080x16",
-			"TARGET_VNC_RESOLUTION": "1280x768",
-			"TARGET_VNC_PORT": "5901",
-			"TARGET_NOVNC_PORT": "6080",
-			"VNC_PASSWORD": "vscode",
-			"INSTALL_FIREFOX": "true"
-		}
-	},
+
+	// Uncomment this line and comment out the "image" to iterate on the container
+	// "dockerFile": "base.Dockerfile",
+	"image": "ghcr.io/chuxel-com/devcontainers/code-oss:latest",
+
+	"workspaceMount": "source=${localWorkspaceFolder},target=/home/node/workspace/vscode,type=bind,consistency=cached",
+	"workspaceFolder": "/home/node/workspace/vscode",
 	"overrideCommand": false,
 	"runArgs": [
 		"--init",
-		// seccomp=unconfined is required for Chrome sandboxing
-		"--security-opt", "seccomp=unconfined"
+		"--security-opt", "seccomp=unconfined",
+		"--ipc=host"
 	],
 
 	"settings": {
