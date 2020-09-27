@@ -15,19 +15,14 @@
 	],
 
 	"settings": {
-		// zsh is also available
 		"terminal.integrated.shell.linux": "/bin/bash",
 		"resmon.show.battery": false,
 		"resmon.show.cpufreq": false,
-		"remote.extensionKind": {
-			"ms-vscode.js-debug-nightly": "workspace",
-			"msjsdiag.debugger-for-chrome": "workspace"
-		},
 		"debug.chrome.useV3": true
 	},
 
 	// noVNC, VNC ports, debug
-	"forwardPorts": [6080, 5901, 9222],
+	"forwardPorts": [6080, 5901],
 
 	"extensions": [
 		"dbaeumer.vscode-eslint",
