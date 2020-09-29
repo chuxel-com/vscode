@@ -32,7 +32,7 @@ Next: **[Try it out!](#try-it)**
 
 ## Quick start - GitHub Codespaces
 
-> Note that the current user beta for GitHub Codespaces uses a "Basic" sized codespace which is too small to run a full build of VS Code. You'll soon be able to use a "Standard" sized codespace (4-core, 8GB) that will be better suited for this purpose.
+> **IMPORTANT:** The current user beta for GitHub Codespaces uses a "Basic" sized codespace which is too small to run a full build of VS Code. You'll soon be able to use a "Standard" sized codespace (4-core, 8GB) that will be better suited for this purpose.
 
 1. From the [microsoft/vscode GitHub repository](https://github.com/microsoft/vscode), click on the **Code** dropdown, select **Open with Codespaces**, and the **New codespace**
 
