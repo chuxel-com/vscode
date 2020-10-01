@@ -21,7 +21,6 @@
 	"extensions": [
 		"dbaeumer.vscode-eslint",
 		"EditorConfig.EditorConfig",
-		"msjsdiag.debugger-for-chrome",
 		"mutantdino.resourcemonitor",
 		"GitHub.vscode-pull-request-github"
 	],
