@@ -1,29 +1,21 @@
 #!/bin/bash
 set -e
 
-SOURCE_FOLDER=${1:-"."}
-CACHE_FOLDER=${2:-"/usr/local/etc/devcontainer-cache"}
+SOURCE_FOLDER="$(cd "${1:-"."}" && pwd)"
+CACHE_FOLDER="${2:-"/usr/local/etc/devcontainer-cache"}"
 
-date
+echo "[$(date)] Starting restore operation"
 
 if [ ! -d "${CACHE_FOLDER}" ]; then
 	echo "No cache folder found."
 	exit 0
+
 fi
 
-cd "${SOURCE_FOLDER}"
-while read in; do
-	FULL_TARGET_PATH="${SOURCE_FOLDER}/${in}"
-	if [ -e "${FULL_TARGET_PATH}" ]; then
-		echo "Removing existing ${FULL_TARGET_PATH}..."
-		rm -rf "${FULL_TARGET_PATH}"
-	fi
+cd "${CACHE_FOLDER}"
+tar cf - "." | (cd "${SOURCE_FOLDER}" && tar xvf -)
 
-	TARGET_BASEPATH="$(dirname $in)"
-	echo "Restoring $(basename $in) to ${TARGET_BASEPATH}..."
-	FULL_TARGET_BASEPATH="${SOURCE_FOLDER}/${TARGET_BASEPATH}"
-	mkdir -p "${FULL_TARGET_BASEPATH}"
-	mv "${CACHE_FOLDER}/$in" "${FULL_TARGET_BASEPATH}"
-done < "${CACHE_FOLDER}/cache.manifest"
+echo "[$(date)] Restore complete"
 
-date
+
+
