@@ -12,8 +12,10 @@ if [ ! -d "${CACHE_FOLDER}" ]; then
 
 fi
 
+echo "Restoring data in ${CACHE_FOLDER} to ${SOURCE_FOLDER}..."
+
 cd "${CACHE_FOLDER}"
-tar cf - "." | (cd "${SOURCE_FOLDER}" && tar xvf -)
+tar cf - "." | (cd "${SOURCE_FOLDER}" && tar xvf -) > /dev/null
 
 echo "[$(date)] Restore complete"
 
