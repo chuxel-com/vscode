@@ -13,4 +13,4 @@ RUN mkdir /usr/local/etc/devcontainer-cache \
 FROM mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 RUN mkdir /usr/local/etc/devcontainer-cache \
 	&& chown node /usr/local/etc/devcontainer-cache
-COPY --from=cache --chown=node:node /usr/local/etc/devcontainer-precache /usr/local/etc/devcontainer-precache
+COPY --from=cache --chown=node:node /usr/local/etc/devcontainer-cache /usr/local/etc/devcontainer-cache

@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 SOURCE_FOLDER=${1:-"."}
 CACHE_FOLDER=${2:-"/usr/local/etc/devcontainer-cache"}
 

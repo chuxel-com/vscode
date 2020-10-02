@@ -1,7 +1,7 @@
 ./out
 ./node_modules
-./build/lib/watch/node_modules
 ./build/node_modules
+./build/lib/watch/node_modules
 ./extensions/microsoft-authentication/node_modules
 ./extensions/vscode-colorize-tests/node_modules
 ./extensions/node_modules
