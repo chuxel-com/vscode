@@ -4,6 +4,8 @@ set -e
 SOURCE_FOLDER=${1:-"."}
 CACHE_FOLDER=${2:-"/usr/local/etc/devcontainer-cache"}
 
+date
+
 if [ ! -d "${CACHE_FOLDER}" ]; then
 	echo "No cache folder found."
 	exit 0
@@ -23,3 +25,5 @@ while read in; do
 	mkdir -p "${FULL_TARGET_BASEPATH}"
 	mv "${CACHE_FOLDER}/$in" "${FULL_TARGET_BASEPATH}"
 done < "${CACHE_FOLDER}/cache.manifest"
+
+date

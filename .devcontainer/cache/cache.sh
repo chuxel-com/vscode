@@ -5,6 +5,8 @@ SCRIPT_PATH=$(dirname $0)
 SOURCE_FOLDER=${1:-"."}
 CACHE_FOLDER=${2:-"/usr/local/etc/devcontainer-cache"}
 
+date
+
 mkdir -p "${CACHE_FOLDER}"
 cp -f "${SCRIPT_PATH}/cache.manifest" "${CACHE_FOLDER}"
 
@@ -17,3 +19,5 @@ while read in; do
 	mkdir -p "${FULL_TARGET_PATH}"
 	cp -f -p -R "$in" "${FULL_TARGET_PATH}"
 done < "${CACHE_FOLDER}/cache.manifest"
+
+date
