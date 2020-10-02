@@ -25,5 +25,7 @@
 		"GitHub.vscode-pull-request-github"
 	],
 
+	"postCreateCommand": ".devcontainer/precache/restore.sh && yarn install",
+
 	"remoteUser": "node"
 }

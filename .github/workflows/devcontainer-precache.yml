@@ -1,0 +1,33 @@
+name: Dev Container Image Generation
+
+on:
+  push:
+    paths:
+      - '**/package.json'
+      - '**/package-lock.json'
+      - '**/yarn.lock'
+
+jobs:
+  devcontainer:
+    name: Precache image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v2
+
+      - name: Build and push
+        id: build_and_push
+        run: |
+          set -e
+          GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
+          if [ "$GIT_BRANCH" == "" ]; then
+              GIT_BRANCH=master
+          fi
+          if [ "${GIT_BRANCH}" == "master" ]; then
+            IMAGE_TAG="latest"
+          else
+            IMAGE_TAG=${GIT_BRANCH}
+          fi
+          echo ${{secrets.IMAGE_REGISTRY_PAT}} | docker login ghcr.io -u ${{secrets.IMAGE_REGISTRY_USER}} --password-stdin
+          bash .devcontainer/build-image.sh ghcr.io/chuxel-com/devcontainers/code-oss ${IMAGE_TAG}
