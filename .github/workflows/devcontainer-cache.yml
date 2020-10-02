@@ -1,4 +1,4 @@
-name: Dev Container Image Generation
+name: Dev Container Cache Image Generation
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   devcontainer:
-    name: Precache image
+    name: Cache image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
