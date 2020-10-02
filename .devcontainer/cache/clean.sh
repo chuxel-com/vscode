@@ -2,9 +2,9 @@
 
 SCRIPT_PATH=$(dirname $0)
 SOURCE_FOLDER=${1:-"."}
-PRECACHE_FOLDER=${2:-"/usr/local/etc/devcontainer-cache"}
+CACHE_FOLDER=${2:-"/usr/local/etc/devcontainer-cache"}
 
-rm -rf "${PRECACHE_FOLDER}"
+rm -rf "${CACHE_FOLDER}"
 
 cd "${SOURCE_FOLDER}"
 while read in; do
