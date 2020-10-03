@@ -11,7 +11,8 @@ if [ ! -d "${CACHE_FOLDER}" ]; then
 	exit 0
 fi
 
-echo "Restoring data in ${CACHE_FOLDER} to ${SOURCE_FOLDER}..."
+echo "Expanding $(du -h "${CACHE_FOLDER}/cache.tar") file to ${SOURCE_FOLDER}..."
+
 
 cd "${SOURCE_FOLDER}"
 tar -xf "${CACHE_FOLDER}/cache.tar"

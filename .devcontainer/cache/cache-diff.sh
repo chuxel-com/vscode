@@ -11,6 +11,7 @@ cd "${SOURCE_FOLDER}"
 find .  -not -path "./.git/*" > /tmp/devcontainer-cache-after.txt
 grep -Fxvf /tmp/devcontainer-cache-before.txt /tmp/devcontainer-cache-after.txt > /tmp/devcontainer-cache.manifest
 mkdir -p "${CACHE_FOLDER}"
-tar -cf "${CACHE_FOLDER}/cache.tar" -T /tmp/devcontainer-cache.manifest
+tar -cf "${CACHE_FOLDER}/cache.tar" -t /tmp/devcontainer-cache.manifest
+du -h "${CACHE_FOLDER}/cache.tar"
 
 echo "[$(date)] Caching complete."
