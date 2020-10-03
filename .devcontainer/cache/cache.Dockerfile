@@ -4,7 +4,6 @@ WORKDIR /source
 COPY --chown=node:node . /source/
 RUN mkdir /usr/local/etc/devcontainer-cache \
 	&& chown node /usr/local/etc/devcontainer-cache /source \
-	&& \
 	&& su node -c "\
 		.devcontainer/cache/before-cache.sh \
 		&& yarn install \
