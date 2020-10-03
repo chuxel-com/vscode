@@ -26,7 +26,7 @@
 		"GitHub.vscode-pull-request-github"
 	],
 
-	"postCreateCommand": ".devcontainer/cache/restore.sh",
+	"postCreateCommand": ".devcontainer/cache/restore-diff.sh",
 
 	"remoteUser": "node"
 }
