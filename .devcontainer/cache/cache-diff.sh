@@ -11,7 +11,7 @@ cd "${SOURCE_FOLDER}"
 find .  -not -path "*./.git/*" -and -not -path "./.git" -and -not -path "${SCRIPT_PATH}/*.manifest" > "${SCRIPT_PATH}/after.manifest"
 grep -Fxvf  "${SCRIPT_PATH}/before.manifest" "${SCRIPT_PATH}/after.manifest"> "${SCRIPT_PATH}/cache.manifest"
 mkdir -p "${CACHE_FOLDER}"
-tar -cf "${CACHE_FOLDER}/cache.tar" --files-from /tmp/devcontainer-cache.manifest --totals
+tar -chf "${CACHE_FOLDER}/cache.tar" --files-from "${SCRIPT_PATH}/cache.manifest" --totals
 du -h "${CACHE_FOLDER}/cache.tar"
 
 echo "[$(date)] Caching complete."
