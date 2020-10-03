@@ -4,9 +4,10 @@ WORKDIR /source
 COPY --chown=node:node . /source/
 RUN mkdir /usr/local/etc/devcontainer-cache \
 	&& chown node /usr/local/etc/devcontainer-cache /source \
-	&& .devcontainer/cache/before-cache.sh \
+	&& \
 	&& su node -c "\
-		yarn install \
+		.devcontainer/cache/before-cache.sh \
+		&& yarn install \
 		&& yarn electron \
 		&& yarn compile \
 		&& .devcontainer/cache/cache-diff.sh"
