@@ -8,10 +8,10 @@ CACHE_FOLDER=${2:-"/usr/local/etc/devcontainer-cache"}
 echo "[$(date)] Starting cache operation"
 
 cd "${SOURCE_FOLDER}"
-find .  -not -path "*./.git/*" -and -not -path "./.git" -and -not -path "${SCRIPT_PATH}/*.manifest" > "${SCRIPT_PATH}/after.manifest"
-grep -Fxvf  "${SCRIPT_PATH}/before.manifest" "${SCRIPT_PATH}/after.manifest"> "${SCRIPT_PATH}/cache.manifest"
+find . -not -path "*./.git/*" -and -not -path "./.git" -and -not -path "${SCRIPT_PATH}/*.manifest" -type f > "${SCRIPT_PATH}/after.manifest"
+grep -Fxvf  "${SCRIPT_PATH}/before.manifest" "${SCRIPT_PATH}/after.manifest" > "${SCRIPT_PATH}/cache.manifest"
 mkdir -p "${CACHE_FOLDER}"
-tar --files-from="${SCRIPT_PATH}/cache.manifest" -chf "${CACHE_FOLDER}/cache.tar" --totals
+tar -cf "${CACHE_FOLDER}/cache.tar" --totals --files-from "${SCRIPT_PATH}/cache.manifest"
 du -h "${CACHE_FOLDER}/cache.tar"
 
 echo "[$(date)] Caching complete."
