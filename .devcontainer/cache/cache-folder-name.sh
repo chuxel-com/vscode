@@ -10,7 +10,7 @@ echo "[$(date)] Starting cache operation"
 CACHE_MANIFEST=$(cd ${SOURCE_FOLDER} && find -name 'node_modules' -or -name 'out' -type d | grep -vE '.*/node_modules/.*/(node_modules|out)')
 
 mkdir -p "${CACHE_FOLDER}"
-#echo "${CACHE_MANIFEST}" > "${CACHE_FOLDER}/cache.manifest"
+echo "${CACHE_MANIFEST}" > "${CACHE_FOLDER}/cache.manifest"
 
 echo "Cache folder: ${CACHE_FOLDER}"
 cd "${SOURCE_FOLDER}"
