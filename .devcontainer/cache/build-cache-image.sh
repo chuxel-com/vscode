@@ -9,9 +9,12 @@ set -e
 SCRIPT_PATH="$(cd "$(dirname $0)" && pwd)"
 BRANCH="${1:-"latest"}"
 REPOSITORY="${2:-"ghcr.io/chuxel-com/microsoft/vscode/cache"}"
-
 TAG="${BRANCH//\//-}"
 
+echo "[$(date)] ${BRANCH} => ${TAG}"
 cd "${SCRIPT_PATH}/../.."
-docker build -t ${REPOSITORY}:"${BRANCH}" -f "${SCRIPT_PATH}/cache/cache.Dockerfile" .
-docker push ${REPOSITORY}:"${BRANCH}"
+echo "[$(date)] Building image..."
+docker build -t ${REPOSITORY}:"${TAG}" -f "${SCRIPT_PATH}/cache/cache.Dockerfile" .
+echo "[$(date)] Pushing image..."
+docker push ${REPOSITORY}:"${TAG}"
+echo "[$(date)] Done!"
