@@ -20,5 +20,5 @@ echo "[$(date)] Expanding $(du -h "${CACHE_FOLDER}/cache.tar") file to ${SOURCE_
 cd "${SOURCE_FOLDER}"
 tar -xf "${CACHE_FOLDER}/cache.tar"
 rm -f "${CACHE_FOLDER}/cache.tar"
-echo "[$(date)] Restore complete"
+echo "[$(date)] Done!"
 

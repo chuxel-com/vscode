@@ -13,8 +13,9 @@ TAG="${BRANCH//\//-}"
 
 echo "[$(date)] ${BRANCH} => ${TAG}"
 cd "${SCRIPT_PATH}/../.."
-echo "[$(date)] Building image..."
-docker build -t ${REPOSITORY}:"${TAG}" -f "${SCRIPT_PATH}/cache/cache.Dockerfile" .
+echo "[$(date)] Starting image build..."
+docker build -t ${REPOSITORY}:"${TAG}" -f "${SCRIPT_PATH}/cache.Dockerfile" .
+echo "[$(date)] Image build complete."
 echo "[$(date)] Pushing image..."
 docker push ${REPOSITORY}:"${TAG}"
 echo "[$(date)] Done!"
