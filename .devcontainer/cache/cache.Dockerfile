@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 
 COPY --chown=node:node . /repo-source-tmp/
 RUN mkdir /usr/local/etc/devcontainer-cache \
-	&& chown node /usr/local/etc/devcontainer-cache /source \
+	&& chown node /usr/local/etc/devcontainer-cache /repo-source-tmp \
 	&& su node -c "\
 		cd /repo-source-tmp \
 		&& .devcontainer/cache/before-cache.sh \
