@@ -1,17 +1,14 @@
-FROM mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev as cache
+FROM mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
 
-WORKDIR /source
-COPY --chown=node:node . /source/
+COPY --chown=node:node . /repo-source-tmp/
 RUN mkdir /usr/local/etc/devcontainer-cache \
 	&& chown node /usr/local/etc/devcontainer-cache /source \
 	&& su node -c "\
-		.devcontainer/cache/before-cache.sh \
+		cd /repo-source-tmp/ \
+		&& .devcontainer/cache/before-cache.sh \
 		&& yarn install \
 		&& yarn electron \
 		&& yarn compile \
-		&& .devcontainer/cache/cache-diff.sh"
-
-FROM mcr.microsoft.com/vscode/devcontainers/repos/microsoft/vscode:dev
-RUN mkdir /usr/local/etc/devcontainer-cache \
-	&& chown node /usr/local/etc/devcontainer-cache
-COPY --from=cache --chown=node /usr/local/etc/devcontainer-cache /usr/local/etc/devcontainer-cache
+		&& yarn cache clean \
+		&& .devcontainer/cache/cache-diff.sh" \
+	&& rm -rf /repo-source-tmp/
