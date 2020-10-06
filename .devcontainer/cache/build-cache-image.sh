@@ -10,7 +10,7 @@ SCRIPT_PATH="$(cd "$(dirname $0)" && pwd)"
 BRANCH="${1:-"latest"}"
 REPOSITORY="${2:-"ghcr.io/chuxel-com/microsoft/vscode/cache"}"
 
-TAG="${BRANCH//\\/-}"
+TAG="${BRANCH//\//-}"
 
 cd "${SCRIPT_PATH}/../.."
 docker build -t ${REPOSITORY}:"${BRANCH}" -f "${SCRIPT_PATH}/cache/cache.Dockerfile" .
