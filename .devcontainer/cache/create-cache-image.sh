@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SCRIPT_PATH=$(cd dirname $0 && pwd)
+SCRIPT_PATH=$(cd "$(dirname $0)" && pwd)
 TAG=${1:-"latest"}
 REPOSITORY=${2:-"ghcr.io/chuxel-com/microsoft/vscode/cache"}
 

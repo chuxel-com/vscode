@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SCRIPT_PATH=$(cd dirname $0 && pwd)
+SCRIPT_PATH=$(cd "$(dirname $0)" && pwd)
 SOURCE_FOLDER=${1:-"."}
 CACHE_FOLDER=${2:-"/usr/local/etc/devcontainer-cache"}
 
