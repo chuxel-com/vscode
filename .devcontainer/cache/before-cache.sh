@@ -5,7 +5,7 @@
 
 set -e
 
-SCRIPT_PATH=$(cd "$(dirname $0)" && pwd)
+SCRIPT_PATH="$(cd "$(dirname $0)" && pwd)"
 SOURCE_FOLDER="${1:-"."}"
 
 cd "${SOURCE_FOLDER}"

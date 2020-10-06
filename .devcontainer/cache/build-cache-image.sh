@@ -6,10 +6,12 @@
 
 set -e
 
-SCRIPT_PATH=$(cd "$(dirname $0)" && pwd)
-TAG=${1:-"latest"}
-REPOSITORY=${2:-"ghcr.io/chuxel-com/microsoft/vscode/cache"}
+SCRIPT_PATH="$(cd "$(dirname $0)" && pwd)"
+BRANCH="${1:-"latest"}"
+REPOSITORY="${2:-"ghcr.io/chuxel-com/microsoft/vscode/cache"}"
+
+TAG="${BRANCH//\\/-}"
 
 cd "${SCRIPT_PATH}/../.."
-docker build -t ${REPOSITORY}:${TAG} -f "${SCRIPT_PATH}/cache/cache.Dockerfile" .
-docker push ${REPOSITORY}:${TAG}
+docker build -t ${REPOSITORY}:"${BRANCH}" -f "${SCRIPT_PATH}/cache/cache.Dockerfile" .
+docker push ${REPOSITORY}:"${BRANCH}"
