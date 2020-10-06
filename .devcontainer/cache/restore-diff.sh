@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# This file restores the results of the "prepare.sh" into their proper locations
+# once the container has been created. It runs as a postCreateCommand which
+# in GitHub Codespaces occurs parallel to other startup activities and does not
+# really add to the overal startup time given how quick the operation is (despite
+# managing about 1.8GB of data).
+
 set -e
 
 SOURCE_FOLDER="$(cd "${1:-"."}" && pwd)"

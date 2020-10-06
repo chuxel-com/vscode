@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# This file is used to archive off a copy of any differences in the source tree into another location
+# in the image. Once the codespace is up, this will be restored into its proper location (which is
+# quick and happens parallel to other startup activities)
+
 set -e
 
 SCRIPT_PATH=$(cd "$(dirname $0)" && pwd)

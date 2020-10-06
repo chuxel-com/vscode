@@ -9,7 +9,7 @@ on:
 
 jobs:
   devcontainer:
-    name: Cache image
+    name: Generate cache image
     runs-on: ubuntu-latest
     steps:
       - name: Free more space
@@ -39,5 +39,5 @@ jobs:
             IMAGE_TAG=${GIT_BRANCH}
           fi
           echo ${{secrets.IMAGE_REGISTRY_PAT}} | docker login ghcr.io -u ${{secrets.IMAGE_REGISTRY_USER}} --password-stdin
-          bash .devcontainer/cache/create-cache-image.sh latest
+          bash .devcontainer/cache/build-cache-image.sh "${GIT_BRANCH}"
 
