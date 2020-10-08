@@ -7,15 +7,22 @@
 set -e
 
 SCRIPT_PATH="$(cd "$(dirname $0)" && pwd)"
-BRANCH="${1:-"latest"}"
-REPOSITORY="${2:-"ghcr.io/chuxel-com/microsoft/vscode/cache"}"
-TAG="${BRANCH//\//-}"
+CONTAINER_REPOSITORY="$1"
+BRANCH="${2:-"master"}"
 
+if [ "${CONTAINER_IMAGE_REPOSITORY}" = "" ]; then
+	echo "Container repository not specified!"
+	exit 1
+fi
+
+TAG="${BRANCH//\//-}"
 echo "[$(date)] ${BRANCH} => ${TAG}"
 cd "${SCRIPT_PATH}/../.."
+
 echo "[$(date)] Starting image build..."
-docker build -t ${REPOSITORY}:"${TAG}" -f "${SCRIPT_PATH}/cache.Dockerfile" .
+docker build -t ${CONTAINER_IMAGE_REPOSITORY}:"${TAG}" -f "${SCRIPT_PATH}/cache.Dockerfile" .
 echo "[$(date)] Image build complete."
+
 echo "[$(date)] Pushing image..."
-docker push ${REPOSITORY}:"${TAG}"
+docker push ${CONTAINER_IMAGE_REPOSITORY}:"${TAG}"
 echo "[$(date)] Done!"

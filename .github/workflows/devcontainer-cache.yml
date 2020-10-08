@@ -1,7 +1,12 @@
-name: Dev Container Cache Image Generation
+name: VS Code Repo Dev Container Cache Image Generation
 
 on:
   push:
+    # Currently doing this for master, but could be done for PRs as well
+    branch:
+      - 'clantz/precache'
+
+    # Only updates to these files result in changes to installed packages, so skip otherwise
     paths:
       - '**/package.json'
       - '**/package-lock.json'
@@ -12,32 +17,26 @@ jobs:
     name: Generate cache image
     runs-on: ubuntu-latest
     steps:
-      - name: Free more space
-        id: free_space
-        run: |
-          set -e
-          # Ensure enough space is available for build
-          sudo apt-get autoremove -y
-          sudo apt-get clean -y
-          sudo rm -rf /usr/share/dotnet
-
       - name: Checkout
         id: checkout
         uses: actions/checkout@v2
+
+      - name: Azure CLI login
+        id: az_login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZ_ACR_CREDS }}
 
       - name: Build and push
         id: build_and_push
         run: |
           set -e
+
+          ACR_REGISTRY_NAME=$(echo ${{ secrets.CONTAINER_IMAGE_REGISTRY }} | grep -oP '(.+)(?=\.azurecr\.io)')
+          az acr login --name $ACR_REGISTRY_NAME
+
           GIT_BRANCH=$(echo "${{ github.ref }}" | grep -oP 'refs/(heads|tags)/\K(.+)')
-          if [ "$GIT_BRANCH" == "" ]; then
-              GIT_BRANCH=master
-          fi
-          if [ "${GIT_BRANCH}" == "master" ]; then
-            IMAGE_TAG="latest"
-          else
-            IMAGE_TAG=${GIT_BRANCH}
-          fi
-          echo ${{secrets.IMAGE_REGISTRY_PAT}} | docker login ghcr.io -u ${{secrets.IMAGE_REGISTRY_USER}} --password-stdin
-          bash .devcontainer/cache/build-cache-image.sh "${GIT_BRANCH}"
+          if [ "$GIT_BRANCH" == "" ]; then GIT_BRANCH=master; fi
+
+          devcontainer/cache/build-cache-image.sh "${{ secrets.CONTAINER_IMAGE_REGISTRY }}" "master"
 
