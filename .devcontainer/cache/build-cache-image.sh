@@ -7,7 +7,7 @@
 set -e
 
 SCRIPT_PATH="$(cd "$(dirname $0)" && pwd)"
-CONTAINER_REPOSITORY="$1"
+CONTAINER_IMAGE_REPOSITORY="$1"
 BRANCH="${2:-"master"}"
 
 if [ "${CONTAINER_IMAGE_REPOSITORY}" = "" ]; then
