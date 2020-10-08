@@ -20,9 +20,9 @@ echo "[$(date)] ${BRANCH} => ${TAG}"
 cd "${SCRIPT_PATH}/../.."
 
 echo "[$(date)] Starting image build..."
-docker build -t ${CONTAINER_IMAGE_REPOSITORY}:"${TAG}" -f "${SCRIPT_PATH}/cache.Dockerfile" .
+docker build -t "${CONTAINER_IMAGE_REPOSITORY}:${TAG}" -f "${SCRIPT_PATH}/cache.Dockerfile" .
 echo "[$(date)] Image build complete."
 
 echo "[$(date)] Pushing image..."
-docker push ${CONTAINER_IMAGE_REPOSITORY}:"${TAG}"
+docker push "${CONTAINER_IMAGE_REPOSITORY}:${TAG}"
 echo "[$(date)] Done!"
